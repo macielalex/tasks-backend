@@ -11,7 +11,7 @@ module.exports = app => {
         
         //consulta no banco pelo email
         const user = await app.db('users')
-            .where({email: req.body.email})
+            .whereRaw("LOWER(email) = LOWER(?) ", req.body.email)
             .first()
 
          //comparando senha   
